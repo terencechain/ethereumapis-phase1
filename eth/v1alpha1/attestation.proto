@@ -1,4 +1,4 @@
-// Copyright 2019 Prysmatic Labs.
+// Copyright 2020 Prysmatic Labs.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,8 +29,11 @@ message Attestation {
 
     AttestationData data = 2;
 
+    // The custody bits of the shard blocks.
+    bytes custody_bits_blocks = 3;
+
     // 96 byte BLS aggregate signature.
-    bytes signature = 3;
+    bytes signature = 4;
 }
 
 message AggregateAttestationAndProof {
@@ -62,6 +65,12 @@ message AttestationData {
 
     // The checkpoint attempting to be justified for the current epoch and its epoch boundary block
     Checkpoint target = 5;
+
+    // 32 byte root of the shard head.
+    bytes shard_head_root = 6;
+
+    // 32 byte root of the shard transition.
+    bytes shard_transition_root = 7;
 }
 
 message Crosslink {
