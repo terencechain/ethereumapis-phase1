@@ -1,4 +1,4 @@
-// Copyright 2019 Prysmatic Labs.
+// Copyright 2020 Prysmatic Labs.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@ syntax = "proto3";
 package ethereum.eth.v1alpha1;
 
 import "eth/v1alpha1/attestation.proto";
+import "eth/v1alpha1/shard.proto";
 
 option csharp_namespace = "Ethereum.Eth.v1alpha1";
 option go_package = "github.com/prysmaticlabs/ethereumapis/eth/v1alpha1;eth";
@@ -77,6 +78,18 @@ message BeaconBlockBody {
 
     // At most MAX_VOLUNTARY_EXITS.
     repeated SignedVoluntaryExit voluntary_exits = 8;
+
+    // Custody game fields.
+    repeated bytes custody_slashings = 9;
+    repeated bytes custody_key_reveals = 10;
+    repeated bytes early_derived_secret_reveals = 11;
+
+    // Shards.
+    repeated ShardTransition shard_transitions = 12;
+
+    // Light clients fields.
+    repeated bytes light_client_signature_bits = 13;
+    bytes light_client_signature = 14;
 }
 
 // Proposer slashings are proofs that a slashable offense has been committed by
@@ -190,7 +203,4 @@ message IndexedAttestation {
     repeated uint64 attesting_indices = 1;
 
     AttestationData data = 2;
-
-    // 96 bytes aggregate signature.
-    bytes signature = 3;
 }
