@@ -1,1 +1,54 @@
-package eth
+// Copyright 2020 Prysmatic Labs.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+syntax = "proto3";
+
+package ethereum.eth.v1alpha1;
+
+option csharp_namespace = "Ethereum.Eth.v1alpha1";
+option go_package = "github.com/prysmaticlabs/ethereumapis/eth/v1alpha1;eth";
+option java_multiple_files = true;
+option java_outer_classname = "AttestationProto";
+option java_package = "org.ethereum.eth.v1alpha1";
+option php_namespace = "Ethereum\\Eth\\v1alpha1";
+
+message ShardState {
+    // The current slot of the shard state.
+    uint64 slot = 1;
+
+    // The current gas price of the shard state.
+    uint64 gasprice = 2;
+
+    // The 32 byte data of the shard state.
+    bytes data = 3;
+
+    // The 32 byte root of latest block.
+    bytes latest_block_root = 4;
+}
+
+message ShardTransition {
+    // The start slot of the shard transition.
+    uint64 start_slot = 1;
+
+    // The list of lengths of shard block.
+    repeated uint64 shard_block_lengths = 2;
+
+    // The list of 32 byte shard data roots.
+    repeated bytes shard_data_roots = 3;
+
+    // The list of shard states.
+    repeated bytes shard_states = 4;
+
+    // 96 byte BLS aggregate signature.
+    bytes signature = 5;
+}
